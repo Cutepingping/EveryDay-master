@@ -121,6 +121,12 @@ const Example = {
 * 触发`DOM`更新。
 * 调用`beforeRouteEnter`守卫中传给`next`的回调函数，创建好的组件实例会作为回调函数的参数传入。
 
+## 考点
+有哪些钩子函数
+![有哪些钩子函数](https://img-blog.csdnimg.cn/4cbb47c8580e4344a9d92b084490362f.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA56eA56eA55qE5aWH5aaZ5peF6KGM,size_20,color_FFFFFF,t_70,g_se,x_16)
+
+全局守卫
+![全局守卫]()
 ## 每日一题
 
 ```
