@@ -140,6 +140,29 @@
 * `504` `Gateway Time-out`: 充当网关或代理的服务器，未及时从远端服务器获取请求。
 * `505` `HTTP Version not supported`: 服务器不支持请求的`HTTP`协议的版本，无法完成处理。
 
+## cookie相关的字端
+* `name`: 为一个cookie的名称。
+* `value`: 为一个cookie的值。
+* `domain`: 可以访问此cookie的域名。
+* `path`: 字段为可以访问此cookie的页面路径。 比如domain是abc.com,path是/test，那么只有/test路径下的页面可以读取此cookie。
+* `expires/Max-Age`: 字段为此cookie超时时间。若设置其值为一个时间，那么当到达此时间后，此cookie失效。不设置的话默认值是Session，意思是cookie会和session一起失效。当浏览器关闭(不是浏览器标签页，而是整个浏览器) 后，此cookie失效。
+* `Size`: 此cookie大小
+* `cookie`: cookie的httponly属性。若此属性为true，则只有在http请求头中会带有此cookie的信息，而不能通过document.cookie来访问此cookie。
+* `secure`: 设置是否只能通过https来传递此条cookie, 它是一个布尔值，指定在网络上如何传输cookie，默认是不安全的，通过一个普通的http连接传输
+* `HttpOnly`: HttpOnly 属性限制了 cookie 对 HTTP 请求的作用范围。特别的，该属性指示用户代理忽略那些通过"非 HTTP" 方式对 cookie 的访问（比如浏览器暴露给js的接口）。注意 HttpOnly 属性和 Secure 属性相互独立：一个 cookie 既可以是 HttpOnly 的也可以有 Secure 属性。
+
+>> 非顶级域名，如二级域名或者三级域名，设置的cookie的domain只能为顶级域名或者二级域名或者三级域名本身，不能设置其他二级域名的cookie，否则cookie无法生成。顶级域名只能设置domain为顶级域名，不能设置为二级域名或者三级域名，否则cookie无法生成。二级域名能读取设置了domain为顶级域名或者自身的cookie，不能读取其他二级域名domain的cookie。所以要想cookie在多个二级域名中共享，需要设置domain为顶级域名，这样就可以在所有二级域名里面或者到这个cookie的值了。顶级域名只能获取到domain设置为顶级域名的cookie，其他domain设置为二级域名的无法获取。
+
+>> 如果max-age属性为正数，则表示该cookie会在max-age秒之后自动失效。浏览器会将max-age为正数的cookie持久化，即写到对应的cookie文件中。无论客户关闭了浏览器还是电脑，只要还在max-age秒之前，登录网站时该cookie仍然有效。
+
+>> 如果max-age为负数，则表示该cookie仅在本浏览器窗口以及本窗口打开的子窗口内有效，关闭窗口后该cookie即失效。max-age为负数的Cookie，为临时性cookie，不会被持久化，不会被写到cookie文件中。cookie信息保存在浏览器内存中，因此关闭浏览器该cookie就消失了。cookie默认的max-age值为-1。
+
+‍>> 如果max-age为0，则表示删除该cookie。cookie机制没有提供删除cookie的方法，因此通过设置该cookie即时失效实现删除cookie的效果。失效的Cookie会被浏览器从cookie文件或者内存中删除。
+
+>> 如果不设置expires或者max-age这个cookie默认是Session的，也就是关闭浏览器该cookie就消失了。
+
+>> 这里要说明一下：Session的cookie在ie6下，如果用户实在网页上跳转打开页面或新开窗口（包括target="_blank"，鼠标右键新开窗口），都是在同一个Session内。如果用户新开浏览器程序或者说是进程再打开当前的页面就不是同一个Session。其他浏览器只要你Session存在，还是同一个Session，cookie还能共享。在前段时间的项目中ie6下吃了很大一个亏。
+
 ## 每日一题
 
 ```
